@@ -4,3 +4,13 @@
   <%= render :partial => "form" %>
 
 <% end %>
+
+<% if not @article.id.nil? and current_user.admin? then %>
+  <%= form_tag({ :action => "merge_with", :id => @article.id }, :id => "#{form_type}_form", :enctype => "multipart/form-data") do %>
+  <div class=''>
+    <h3><%= _("Merge Articles") %></h3>
+    <%= _("Article ID") %>: <input id='merge_with' name='merge_with' type="text" style="'width: 200px'" />
+    <input id='submit_merge' type="submit" value="<%= _('Merge') %>" class='btn info' />
+  </div>
+  <% end %>
+<% end %>

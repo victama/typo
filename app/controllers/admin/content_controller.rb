@@ -37,6 +37,23 @@ class Admin::ContentController < Admin::BaseController
     new_or_edit
   end
 
+  def merge_with
+    @article = Article.find(params[:id])
+    other_id = params[:merge_with]
+    if not other_id.nil?
+      other_article = Article.where(:id => other_id).first
+      if not other_article.nil?
+        #@article.merge_with other_article
+        @article.body += other_article.body
+        @article.save
+        redirect_to :action => 'edit', :id => params[:id]
+        return
+      end
+    end
+    redirect_to :action => 'edit', :id => params[:id]
+    flash[:error] = _("Error, ID of article to merge was not valid")
+  end
+
   def destroy
     @record = Article.find(params[:id])
 
@@ -240,4 +257,5 @@ class Admin::ContentController < Admin::BaseController
   def setup_resources
     @resources = Resource.by_created_at
   end
+
 end
