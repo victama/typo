@@ -24,4 +24,5 @@ Feature: Merge Articles
     Then I should be on the edit "How to lose weigth" article page
     And I should see "Stop eating and start exercising!"
     And I should see "It was a joke, do not stop eating, but eat healthy :)"
+    And the article "Diets and more" should no longer exist
 

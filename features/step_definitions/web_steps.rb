@@ -86,6 +86,13 @@ When /I fill in "(.*)" with the id of the "(.*)" article/ do |field, article_tit
   fill_in(field, :with => article.id)
 end
 
+Then /the article "(.*)" should no longer exist/ do |article_title|
+  article = Article.where(:title => article_title).first
+  assert article.nil?
+end
+
+
+
 # Single-line step scoper
 When /^(.*) within (.*[^:])$/ do |step, parent|
   with_scope(parent) { When step }
