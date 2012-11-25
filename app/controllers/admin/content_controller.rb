@@ -48,10 +48,8 @@ class Admin::ContentController < Admin::BaseController
         @article.save
         other_article.comments.each { |comment|
           comment.article = @article
-          @article.comments << comment
           comment.save
         }
-        #@article.comments << other_article.comments
         other_article.destroy
         flash[:notice] = "Article '#{other_article.title}' was merged into this one and deleted."
         redirect_to :action => 'edit', :id => params[:id]
